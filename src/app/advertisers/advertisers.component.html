@@ -1,0 +1,47 @@
+<app-header></app-header>
+
+<app-add-advertiser (newAdvertiser)="doSubmit($event)"></app-add-advertiser>
+
+<mat-card>
+  <mat-card-title>
+    Advertisers
+  </mat-card-title>
+  <mat-card-content>
+    <mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+        <mat-cell *matCellDef="let advertiser"> {{advertiser.id}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let advertiser"> {{advertiser.name}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="orgurl">
+        <mat-header-cell *matHeaderCellDef> URL </mat-header-cell>
+        <mat-cell *matCellDef="let advertiser"> <a href="{{advertiser.orgurl}}">{{advertiser.orgurl}}</a> </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="firstName">
+        <mat-header-cell *matHeaderCellDef> Contact </mat-header-cell>
+        <mat-cell *matCellDef="let advertiser"> {{advertiser.firstName}} {{advertiser.lastName}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+        <mat-cell *matCellDef="let advertiser"> {{advertiser.email}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="telephone">
+        <mat-header-cell *matHeaderCellDef> Telephone </mat-header-cell>
+        <mat-cell *matCellDef="let advertiser"> {{advertiser.telephone}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="address">
+        <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
+        <mat-cell *matCellDef="let advertiser" [innerHtml]="advertiser.addressResolved | advertiserAddress"></mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="updatedTs">
+        <mat-header-cell *matHeaderCellDef> Updated </mat-header-cell>
+        <mat-cell *matCellDef="let advertiser"> {{advertiser.updatedTs | date: 'shortDate' }} </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </mat-card-content>
+</mat-card>
